@@ -276,4 +276,9 @@ resource "vsphere_virtual_machine" "vm" {
 
   shutdown_wait_timeout = var.shutdown_wait_timeout
   force_power_off       = var.force_power_off
+
+  //workaround: https://github.com/hashicorp/terraform-provider-vsphere/issues/1902
+  lifecycle {
+    ignore_changes = [hv_mode, ept_rvi_mode]
+  }
 }
